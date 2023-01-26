@@ -1,24 +1,31 @@
 import { useState } from "react";
-import ModalProfile from "./components/ModalProfile";
+import ModalForm from "./components/ModalForm";
+import MainMenuButtons from "./components/MainMenuButtons";
+import './App.css';
 function App(){
-const [showModalProfile, setShowModalProfile] = useState(false);
-function handleButtonClick(){
-    setShowModalProfile(!showModalProfile);
-}
-
+const [showModalForm, setShowModalForm] = useState(false);
+const [showFullList, setShowFullList]=useState(false);
 
 return(
     <div>
         <h1>Auto Database</h1>
         <h4>by Meteor</h4>
-        <div>
-            <mainMenuButtons 
-            lable={"Add New Entry"}
-            handleOnClick={handleButtonClick}
+        <div className="flex gap-2">
+            <MainMenuButtons 
+             label={"Add New Entry"}
+             handleOnClick={() => setShowModalForm(true)}
             />
-            <mainMenuButtons lable={"Show Full History"}/>
+            <MainMenuButtons 
+             label={"Show Full History"}
+             handleOnClick={() => setShowFullList(true)}
+            />
         </div>
-        {showModalProfile && <ModalProfile/>}
+        {showModalForm && (
+        <ModalForm
+            handleOnClose={() => setShowModalForm(false)}
+        />
+        )}
+    
     </div>
 )
 }
